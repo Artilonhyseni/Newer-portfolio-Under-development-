@@ -7,98 +7,97 @@ const Home: FC = () => {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const [speed, setSpeed] = useState(100); 
+  const [speed, setSpeed] = useState(100);
 
   useEffect(() => {
     const handleTyping = () => {
       const role = roles[currentRoleIndex];
       if (!isDeleting) {
-       
         setDisplayText((prev) => role.slice(0, prev.length + 1));
         if (displayText === role) {
-          setTimeout(() => setIsDeleting(true), 2000); 
+          setTimeout(() => setIsDeleting(true), 2000);
         }
       } else {
-       
         setDisplayText((prev) => role.slice(0, prev.length - 1));
         if (displayText === "") {
           setIsDeleting(false);
-          setCurrentRoleIndex((prevIndex) => (prevIndex + 1) % roles.length); // Loop roles
+          setCurrentRoleIndex((prevIndex) => (prevIndex + 1) % roles.length);
         }
       }
     };
 
-    const timer = setTimeout(handleTyping, isDeleting ? 70 : speed); // Smooth deletion is slightly faster
+    const timer = setTimeout(handleTyping, isDeleting ? 70 : speed);
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, currentRoleIndex, speed]);
 
   return (
-    <div className="bg-black text-white font-sans min-h-screen">
+    <div className="bg-black text-white font-sans">
       <Head>
         <title>Portfolio | Artilon Hyseni</title>
         <meta name="description" content="Portfolio of Artilon Hyseni" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
-      <header className="flex justify-between items-center px-8 py-4 border-b border-gray-800">
-        <h1 className="text-4xl font-bold">Artismedia</h1>
-        <span className="text-white">Front-End Developer</span>
-      </header>
+      {/* Hero Section */}
+      <section className="h-screen flex flex-col items-center justify-center text-center">
+        <header className="absolute top-0 left-0 w-full flex justify-between items-center px-8 py-4">
+          <h1 className="text-4xl font-bold">Artismedia</h1>
+          <span className="text-white">Front-End Developer</span>
+        </header>
 
-    
-      <section className="flex flex-col items-center justify-center h-[50vh] text-center">
-        <h1 className="text-9xl font-extrabold mb-4">Artilon Hyseni</h1>
-        <p className="text-2xl text-white">
-          {displayText}
-          <span className="blinking-cursor">|</span>
-        </p>
-      </section>
-
-    
-      <section className="py-16 px-8">
-        <h2 className="text-2xl font-semibold mb-8">Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[1, 2, 3].map((project, index) => (
-            <div key={index} className="bg-gray-800 rounded-lg shadow-lg p-4">
-              <div className="h-48 bg-gray-600 rounded-lg flex items-center justify-center">
-                <span className="text-gray-400">
-                  Placeholder for Project {index + 1}
-                </span>
-              </div>
-            </div>
-          ))}
+        <div>
+          <h1 className="text-9xl font-extrabold mb-4">Artilon Hyseni</h1>
+          <p className="text-2xl">
+            {displayText}
+            <span className="blinking-cursor">|</span>
+          </p>
+        </div>
+        <div className="absolute bottom-8 animate-bounce text-gray-400">
+          <p>Scroll Down</p>
+          <span>↓</span>
         </div>
       </section>
 
-      
-      <section className="py-16 px-8 border-t border-gray-800">
-        <h2 className="text-2xl font-semibold mb-8">My Skills</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="text-xl font-bold mb-4">Web Development</h3>
+      {/* Kompetencer Section */}
+      <section className="h-screen flex flex-col justify-center items-center bg-gray-900">
+        <h2 className="text-6xl font-semibold mb-16 text-center">Kompetencer</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-12 px-8 w-full max-w-4xl">
+          {/* Programmering */}
+          <div className="flex flex-col text-left">
+            <h3 className="text-3xl font-bold mb-4">Programmering</h3>
             <p className="text-gray-400">
-              HTML, CSS, JavaScript, React, Next.js, Tailwind CSS, Typescript
+              Jeg har erfaring med frontend webudvikling, ved brug af diverse værktøjer som HTML, CSS og React. Disse værktøjer bruger jeg for at skabe brugervenlige digitale løsninger og webapplikationer.
             </p>
           </div>
-          <div>
-            <h3 className="text-xl font-bold mb-4">Design</h3>
+
+          {/* UX/UI Design */}
+          <div className="flex flex-col text-left">
+            <h3 className="text-3xl font-bold mb-4">UX/UI Design</h3>
             <p className="text-gray-400">
-              Figma, Adobe Photoshop, Adobe Illustrator, Adobe After Effects,
-              Canva, Adobe Creative Cloud
+              Med arbejde i UX/UI sikrer jeg, at brugeren altid er hovedpunktet. Jeg har stor passion for at skabe en skarp informationsarkitektur og attraktive interfaces.
+            </p>
+          </div>
+
+          {/* Responsivt Design */}
+          <div className="flex flex-col text-left">
+            <h3 className="text-3xl font-bold mb-4">Responsivt Design</h3>
+            <p className="text-gray-400">
+              Med responsivt design kan mit arbejde bidrage med at gøre hjemmesiden mobilvenlig for at opnå den bedste brugeroplevelse.
+            </p>
+          </div>
+
+          {/* Grafisk Design */}
+          <div className="flex flex-col text-left">
+            <h3 className="text-3xl font-bold mb-4">Grafisk Design</h3>
+            <p className="text-gray-400">
+              Med en stor viden for Adobe After Effects og Creative Cloud kan jeg skabe visuelt attraktive illustrationer.
             </p>
           </div>
         </div>
       </section>
-
-  
-      <footer className="py-8 px-8 border-t border-gray-800 text-center">
-        <p className="text-gray-500">
-          Designed and built by Artilon Hyseni. © 2024
-        </p>
-      </footer>
     </div>
   );
 };
 
 export default Home;
+
